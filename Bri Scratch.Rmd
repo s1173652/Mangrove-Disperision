@@ -4,4 +4,47 @@ author: Bri Cirillo
 output: html_notebook
 ---
 
+# February 25 2020
+
+## Installing Mosaic
+
+```{r}
+install.packages("mosaic")
+library(mosaic)
+```
+
+## Descriptive Stats
+
+### Distance Traveled
+```{r}
+fav_stats(Propagule_Data$DistanceTraveled.m)
+# Descriptives on Distance Traveled in meters
+
+hist(Propagule_Data$DistanceTraveled.m)
+```
+
+### Drop Density
+```{r}
+fav_stats(Propagule_Data$DropDensity)
+# Descriptives on Drop Density
+
+hist(Propagule_Data$DropDensity)
+plot(Propagule_Data$DropDensity)
+```
+
+### Recovery Density
+```{r}
+fav_stats(Propagule_Data$RecoveryDensity)
+# Descriptives on Recovery Density
+
+hist(Propagule_Data$RecoveryDensity)
+```
+
+```{r}
+tally(Propagule_Data$Density)
+```
+
+```{r}
+Propagule_Data$Density8 <- 
+```
 
