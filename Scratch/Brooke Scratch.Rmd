@@ -7,8 +7,12 @@ output: html_notebook
 
 ```{r}
 # Installing Packages
-install.packages("mosaic")
+#install.packages("mosaic")
 library(mosaic)
+library(readxl)
+Propagule_Data <- read_excel("/cloud/project/Propagule Data.xlsx", 
+    sheet = "Sheet1")
+Propagule_Data <- Propagule_Data[-4, ]
 ```
 
 ## Descriptive Stats
