@@ -4,4 +4,64 @@ author: Bri Cirillo
 output: html_notebook
 ---
 
+# February 25 2020
+
+## Installing Mosaic
+
+```{r}
+#install.packages("mosaic")
+#library(mosaic)
+
+library(readxl)
+Propagule_Data <- read_excel("Propagule Data.xlsx", 
+    sheet = "Sheet1")
+
+Propagule_Data=Propagule_Data[-4,]
+
+```
+
+## Descriptive Stats
+
+### Distance Traveled
+```{r}
+fav_stats(Propagule_Data$DistanceTraveled.m)
+# Descriptives on Distance Traveled in meters
+
+hist(Propagule_Data$DistanceTraveled.m, col = "Light Green", main = "Distance Traveled", xlab= "Distance Traveled (m)", ylab="Count")
+
+```
+
+### Drop Density
+```{r}
+fav_stats(Propagule_Data$DropDensity)
+# Descriptives on Drop Density
+
+hist(Propagule_Data$DropDensity, col = "Sea Green", main = "Drop Density", xlab= "Drop Density", ylab="Count")
+plot(Propagule_Data$DropDensity, pch=16, col = "Sea Green", main = "Drop Density", xlab= "Drop Density", ylab="Count")
+```
+
+### Recovery Density
+```{r}
+fav_stats(Propagule_Data$RecoveryDensity)
+# Descriptives on Recovery Density
+
+hist(Propagule_Data$RecoveryDensity, col = "Dark Olive Green", main = "Recovery Density", xlab= "Recovery Density", ylab="Count")
+plot(Propagule_Data$DistanceTraveled.m, Propagule_Data$RecoveryDensity, pch=16, col = "Dark Olive Green", main = "Recovery Density", xlab= "Recovery Density", ylab="Count")
+```
+
+## Density Cut off
+```{r}
+tally(Propagule_Data$Density)
+```
+
+```{r}
+count <- tally(Propagule_Data$DropDensity < 9)
+count
+```
+
+```{r}
+Propagule_Data$DensityNew <- High.Density
+if (Propagule_Data$DropDensity > 9)
+
+```
 
