@@ -9,8 +9,15 @@ output: html_notebook
 ## Installing Mosaic
 
 ```{r}
-install.packages("mosaic")
-library(mosaic)
+#install.packages("mosaic")
+#library(mosaic)
+
+library(readxl)
+Propagule_Data <- read_excel("Propagule Data.xlsx", 
+    sheet = "Sheet1")
+
+Propagule_Data=Propagule_Data[-4,]
+
 ```
 
 ## Descriptive Stats
@@ -20,7 +27,8 @@ library(mosaic)
 fav_stats(Propagule_Data$DistanceTraveled.m)
 # Descriptives on Distance Traveled in meters
 
-hist(Propagule_Data$DistanceTraveled.m)
+hist(Propagule_Data$DistanceTraveled.m, col = "Light Green", main = "Distance Traveled", xlab= "Distance Traveled (m)", ylab="Count")
+
 ```
 
 ### Drop Density
@@ -28,8 +36,8 @@ hist(Propagule_Data$DistanceTraveled.m)
 fav_stats(Propagule_Data$DropDensity)
 # Descriptives on Drop Density
 
-hist(Propagule_Data$DropDensity)
-plot(Propagule_Data$DropDensity)
+hist(Propagule_Data$DropDensity, col = "Sea Green", main = "Drop Density", xlab= "Drop Density", ylab="Count")
+plot(Propagule_Data$DropDensity, pch=16, col = "Sea Green", main = "Drop Density", xlab= "Drop Density", ylab="Count")
 ```
 
 ### Recovery Density
@@ -37,14 +45,23 @@ plot(Propagule_Data$DropDensity)
 fav_stats(Propagule_Data$RecoveryDensity)
 # Descriptives on Recovery Density
 
-hist(Propagule_Data$RecoveryDensity)
+hist(Propagule_Data$RecoveryDensity, col = "Dark Olive Green", main = "Recovery Density", xlab= "Recovery Density", ylab="Count")
+plot(Propagule_Data$DistanceTraveled.m, Propagule_Data$RecoveryDensity, pch=16, col = "Dark Olive Green", main = "Recovery Density", xlab= "Recovery Density", ylab="Count")
 ```
 
+## Density Cut off
 ```{r}
 tally(Propagule_Data$Density)
 ```
 
 ```{r}
-Propagule_Data$Density8 <- 
+count <- tally(Propagule_Data$DropDensity < 9)
+count
+```
+
+```{r}
+Propagule_Data$DensityNew <- High.Density
+if (Propagule_Data$DropDensity > 9)
+
 ```
 
