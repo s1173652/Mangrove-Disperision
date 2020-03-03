@@ -1,0 +1,54 @@
+---
+title: "Brooke Scratch"
+output: html_notebook
+---
+
+# Februrary 25 2020
+
+```{r}
+# Installing Packages
+install.packages("mosaic")
+library(mosaic)
+```
+
+## Descriptive Stats
+
+### Drop Density
+```{r}
+favstats(Propagule_Data$DropDensity)
+hist(Propagule_Data$DropDensity)
+```
+
+### Recovery Density
+```{r}
+favstats(Propagule_Data$RecoveryDensity)
+hist(Propagule_Data$RecoveryDensity)
+```
+
+### Distance Traveled
+```{r}
+fav_stats(Propagule_Data$DistanceTraveled.m)
+hist(Propagule_Data$DistanceTraveled.m)
+```
+
+# Februrary 27 2020
+
+## More Descriptives
+### Distance Traveled by Zone, Tide, and Drop Density (H/L)
+```{r}
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Zone, width=300, data = Propagule_Data)
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Tide, width=300, data = Propagule_Data)
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Density, width=300, data = Propagule_Data)
+```
+
+## Qualitative Data Descriptives
+### Propagules found in each zone, and each tide
+```{r}
+# This counts all propagules found in each zone 
+tally(Propagule_Data$Zone)
+# This counts ll propagules found in each tide, H or L
+tally(Propagule_Data$Tide)
+```
+
+
+
