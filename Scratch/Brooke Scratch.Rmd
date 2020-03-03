@@ -20,19 +20,19 @@ Propagule_Data <- Propagule_Data[-4, ]
 ### Drop Density
 ```{r}
 favstats(Propagule_Data$DropDensity)
-hist(Propagule_Data$DropDensity)
+hist(Propagule_Data$DropDensity, main="Propagule Drop Density", xlab="Drop Density")
 ```
 
 ### Recovery Density
 ```{r}
 favstats(Propagule_Data$RecoveryDensity)
-hist(Propagule_Data$RecoveryDensity)
+hist(Propagule_Data$RecoveryDensity, main="Propagule Recovery Density", xlab="Recovery Density")
 ```
 
 ### Distance Traveled
 ```{r}
 fav_stats(Propagule_Data$DistanceTraveled.m)
-hist(Propagule_Data$DistanceTraveled.m)
+hist(Propagule_Data$DistanceTraveled.m, main="Propagule Distance Traveled", xlab="Distance Traveled")
 ```
 
 # Februrary 27 2020
@@ -40,9 +40,9 @@ hist(Propagule_Data$DistanceTraveled.m)
 ## More Descriptives
 ### Distance Traveled by Zone, Tide, and Drop Density (H/L)
 ```{r}
-histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Zone, width=300, data = Propagule_Data)
-histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Tide, width=300, data = Propagule_Data)
-histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Density, width=300, data = Propagule_Data)
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Zone, width=300, data = Propagule_Data, xlab= "Distance Traveled vs zone", xlim = c(0,400), breaks=15)
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Tide, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Tide", xlim = c(0,400), breaks=15)
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Density, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Density", xlim = c(0,400), breaks=15)
 ```
 
 ## Qualitative Data Descriptives
