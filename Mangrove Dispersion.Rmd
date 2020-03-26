@@ -72,3 +72,14 @@ tally(Propagule_Data$Tide)
 kruskal.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone)
 pairwise.wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone, p.adjust.method = "bonferroni", paired = FALSE)
 ```
+
+### Mann-Whitney U Test: Tide and Drop Density
+####Density
+```{r}
+# This is a non-parametric T-test, because there are only two levels. This will compare the data by the median (ex. H/L drop density vs H/L tide)
+wilcox.test(Propagule_Data$DistanceTraveled.m~ Propagule_Data$Density, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
+```
+#### Tide
+```{r}
+wilcox.test(Propagule_Data$DistanceTraveled.m~ Propagule_Data$Tide, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
+```
