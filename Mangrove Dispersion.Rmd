@@ -2,13 +2,16 @@
 title: "Mangrove Dispersion"
 output: html_notebook
 ---
-
-# Februrary 25 2020
+#### Brooke Attardi and Brianna Cirillio
 
 ```{r}
 # Installing Packages
-install.packages("mosaic")
+# install.packages("mosaic")
 library(mosaic)
+library(readxl)
+Propagule_Data <- read_excel("/cloud/project/Propagule Data.xlsx", 
+    sheet = "Sheet1")
+Propagule_Data <- Propagule_Data[-4, ]
 ```
 
 ## Descriptive Stats
@@ -16,19 +19,56 @@ library(mosaic)
 ### Drop Density
 ```{r}
 favstats(Propagule_Data$DropDensity)
-hist(Propagule_Data$DropDensity)
+hist(Propagule_Data$DropDensity, main="Propagule Drop Density", xlab="Drop Density")
 ```
 
 ### Recovery Density
 ```{r}
 favstats(Propagule_Data$RecoveryDensity)
-hist(Propagule_Data$RecoveryDensity)
+hist(Propagule_Data$RecoveryDensity, main="Propagule Recovery Density", xlab="Recovery Density")
 ```
 
 
 ### Distance Traveled
 ```{r}
 fav_stats(Propagule_Data$DistanceTraveled.m)
-hist(Propagule_Data$DistanceTraveled.m)
+hist(Propagule_Data$DistanceTraveled.m, main="Propagule Distance Traveled", xlab="Distance Traveled")
 ```
 
+#### Distance Traveled by Zone
+```{r}
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone =="1"], width=300, main="Zone 1", xlab= "Distance Traveled", breaks=15)
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone =="2"], width=300, main="Zone 2", xlab= "Distance Traveled", breaks=15)
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone =="3"], width=300, main="Zone 3", xlab= "Distance Traveled", breaks=15)
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Zone, main="Distance Traveled by Zone", ylab="Distance Traveled", xlab="Zone")
+```
+
+#### Distance Traveled by Tide (H/L)
+```{r}
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Tide, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Tide", xlim = c(0,400), breaks=15)
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Tide, main="Distance Traveled by Tide", ylab="Distance Traveled", xlab="Tide")
+```
+
+#### Distance Traveled by Drop Density (H/L)
+```{r}
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Density, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Drop Density", xlim = c(0,400), breaks=15)
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Density, main="Distance Traveled by Drop Density", ylab="Distance Traveled", xlab="Density")
+```
+
+## Qualitative Data Descriptives
+### Propagules found in each zone, and each tide
+```{r}
+# This counts all propagules found in each zone 
+tally(Propagule_Data$Zone)
+favstats(~`DistanceTraveled.m`, `Zone`,  data = Propagule_Data)
+# This counts ll propagules found in each tide, H or L
+tally(Propagule_Data$Tide)
+```
+
+## Running Tests
+### Kruskal Wallis Test: Zones
+```{r}
+# This is a non-parametric ANOVA. We run non-parametrics because the data is not normal. This will compare all data by the median (ex. Median distance travled in Zone 1, compared to Zone 2)
+kruskal.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone)
+pairwise.wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone, p.adjust.method = "bonferroni", paired = FALSE)
+```

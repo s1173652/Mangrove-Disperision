@@ -44,7 +44,7 @@ histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Zone, width=300, d
 histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Tide, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Tide", xlim = c(0,400), breaks=15)
 histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Density, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Drop Density", xlim = c(0,400), breaks=15)
 ```
-#### March 3rd
+# March 3rd 2020
 ```{r}
 # Fixing the histograms of distance traveled by zone so we can see a better representation of how zone effects distance traveled
 histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone =="1"], width=300, main="Zone 1", xlab= "Distance Traveled", breaks=15)
@@ -64,18 +64,35 @@ tally(Propagule_Data$Tide)
 ```
 
 
-## RUNNING TESTS
+## Running Tests
 ### Kruskal Wallis Test: Zones
 ```{r}
 # This is a non-parametric ANOVA. We run non-parametrics because the data is not normal. This will compare all data by the median (ex. Median distance travled in Zone 1, compared to Zone 2)
 kruskal.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone)
 pairwise.wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone, p.adjust.method = "bonferroni", paired = FALSE)
 ```
+
 ### Mann-Whitney U Test: Tide and Drop Density
 ```{r}
 # This is a non-parametric T-test, because there are only two levels. This will compare the data by the median (ex. H/L drop density vs H/L tide)
 
-wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Density)
+wilcox.test(Propagule_Data$DistanceTraveled.m, )
 
+```
+# March 5th 2020
+### Adding some more Descriptives: Boxplots
+#### By Zone
+```{r}
+# Adding boxplots to descriptive stats since we are looking at the medians in KS test
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Zone)
+```
+#### By Drop Density (H/L)
+```{r}
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Density)
+```
+
+#### By Tide (H/L)
+```{r}
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Tide)
 ```
 
