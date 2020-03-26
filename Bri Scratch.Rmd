@@ -1,0 +1,97 @@
+---
+title: "Bri Scratch"
+author: Bri Cirillo
+output: html_notebook
+---
+
+# February 25 2020
+
+## Installing Mosaic
+
+```{r}
+#install.packages("mosaic")
+#library(mosaic)
+
+library(readxl)
+Propagule_Data <- read_excel("Propagule Data.xlsx", 
+    sheet = "Sheet1")
+
+Propagule_Data=Propagule_Data[-4,]
+
+```
+
+## Descriptive Stats
+
+### Distance Traveled
+```{r}
+fav_stats(Propagule_Data$DistanceTraveled.m)
+# Descriptives on Distance Traveled in meters
+
+hist(Propagule_Data$DistanceTraveled.m, col = "Light Green", main = "Distance Traveled", xlab= "Distance Traveled (m)", ylab="Count")
+
+```
+
+### Drop Density
+```{r}
+fav_stats(Propagule_Data$DropDensity)
+# Descriptives on Drop Density
+
+hist(Propagule_Data$DropDensity, col = "Sea Green", main = "Drop Density", xlab= "Drop Density", ylab="Count")
+plot(Propagule_Data$DropDensity, pch=16, col = "Sea Green", main = "Drop Density", xlab= "Drop Density", ylab="Count")
+```
+
+### Recovery Density
+```{r}
+fav_stats(Propagule_Data$RecoveryDensity)
+# Descriptives on Recovery Density
+
+hist(Propagule_Data$RecoveryDensity, col = "Dark Olive Green", main = "Recovery Density", xlab= "Recovery Density", ylab="Count")
+plot(Propagule_Data$DistanceTraveled.m, Propagule_Data$RecoveryDensity, pch=16, col = "Dark Olive Green", main = "Recovery Density", xlab= "Density Traveled", ylab="Recovery Density")
+```
+
+```{r}
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "1"], width=300, data = Propagule_Data,main= " Distanced Traveled vs Zone 1", xlab= "Distance Traveled", breaks = 15, col= "aquamarine2")
+
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "2"], width=300, data = Propagule_Data,main= " Distanced Traveled vs Zone 2", xlab= "Distance Traveled", breaks = 15, col= "aquamarine2")
+
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "3"], width=300, data = Propagule_Data, main= " Distanced Traveled vs Zone 3", xlab= "Distance Traveled", breaks = 15, col= "aquamarine2")
+```
+
+## Density Cut off
+```{r}
+tally(Propagule_Data$Density)
+```
+
+```{r}
+count <- tally(Propagule_Data$DropDensity < 9)
+count
+```
+
+```{r}
+
+High.Density <-(Propagule_Data$DropDensity > 9)
+Propagule_Data$DensityNew[Propagule_Data$DropDensity >= 9] ="H"
+Propagule_Data$DensityNew[Propagule_Data$DropDensity <9] ="L"
+
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$DensityNew, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Density", xlim = c(0,400), breaks=15)
+```
+
+## Kruskal Wallis Test for Distance Traveled vs Zone
+
+```{r}
+?kruskal.test
+kruskal.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone)
+
+pairwise.wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone, p.adjust.method = "bonferroni", paired = FALSE )
+
+```
+
+This makes sense because the median 2 is much higher than 1 and 3, therefore there is a statistical significance between 1 and 2, and 2 and 3.
+
+
+## Mann Whitney U Test for Density
+
+```{r}
+wilcox.test(Propagule_Data$DistanceTraveled.m, as.numeric(Propagule_Data$Density))
+```
+

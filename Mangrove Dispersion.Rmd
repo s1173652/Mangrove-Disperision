@@ -1,8 +1,34 @@
 ---
-title: "R Notebook"
+title: "Mangrove Dispersion"
 output: html_notebook
 ---
 
-hi
+# Februrary 25 2020
 
+```{r}
+# Installing Packages
+install.packages("mosaic")
+library(mosaic)
+```
+
+## Descriptive Stats
+
+### Drop Density
+```{r}
+favstats(Propagule_Data$DropDensity)
+hist(Propagule_Data$DropDensity)
+```
+
+### Recovery Density
+```{r}
+favstats(Propagule_Data$RecoveryDensity)
+hist(Propagule_Data$RecoveryDensity)
+```
+
+
+### Distance Traveled
+```{r}
+fav_stats(Propagule_Data$DistanceTraveled.m)
+hist(Propagule_Data$DistanceTraveled.m)
+```
 
