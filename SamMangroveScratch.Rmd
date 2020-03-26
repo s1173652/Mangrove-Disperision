@@ -1,0 +1,295 @@
+---
+title: "Daneshgar Mangroves"
+author: "Samantha Cavalli"
+output: html_notebook
+---
+
+# 25 February 2020
+
+## Descriptives
+
+```{r}
+#install.packages("mosaic")
+library("mosaic")
+library(readxl)
+Daneshgar_Mangrove_Data_Cleaned<-read_excel("/cloud/project/Daneshgar Mangrove Data Cleaned.xlsx", sheet = "Drop_Points_UTM")
+Daneshgar_Mangrove_Data_Cleaned <- Daneshgar_Mangrove_Data_Cleaned[-4,]
+```
+
+```{r}
+colnames(Daneshgar_Mangrove_Data_Cleaned)
+```
+
+```{r}
+
+favstats(~`Distance traveled.m`, data = Daneshgar_Mangrove_Data_Cleaned)
+favstats(~`Distance traveled.m`, `Zone`, data = Daneshgar_Mangrove_Data_Cleaned)
+
+```
+
+
+```{r}
+hist(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, col = "blue", main = "Distance Traveled", xlab = "Distance Traveled (meters)")
+
+histogram(~Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m` | Daneshgar_Mangrove_Data_Cleaned$Zone, xlab = "Distance Traveled (meters)")
+```
+```{r}
+#install.packages('ggplot2')
+```
+```{r}
+hist(Daneshgar_Mangrove_Data_Cleaned$`Recovery Density`)
+```
+```{r}
+plot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$`Drop Density`, xlab = "Distance Traveled" , ylab = "Drop Density", col = "green", pch = 16)
+
+plot(Daneshgar_Mangrove_Data_Cleaned$`Drop Density`, Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, xlab = "Drop Density" , ylab = "Distance Traveled", col= "blue", pch = 16)
+```
+
+```{r}
+tally(Daneshgar_Mangrove_Data_Cleaned$Density)
+```
+```{r}
+hist(Daneshgar_Mangrove_Data_Cleaned$`Drop Density`)
+```
+
+
+```{r}
+table(Daneshgar_Mangrove_Data_Cleaned$`Drop Density`)
+```
+
+```{r}
+plot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$`Recovery Density`, pch = 19)
+```
+
+# 3 March 2020
+## More Descriptives 
+
+```{r}
+plot(Daneshgar_Mangrove_Data_Cleaned$`Drop Density`, Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, pch = 19, xlab = "Drop Density", ylab = "Distance Traveled")
+```
+### Plots for density 
+
+```{r}
+plot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$`Drop Density`)
+```
+
+```{r}
+hist(Daneshgar_Mangrove_Data_Cleaned$`Drop Density`)
+hist(Daneshgar_Mangrove_Data_Cleaned$`Recovery Density`)
+```
+```{r}
+hist(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, col = "blue", xlab ="Distance Traveled")
+```
+
+
+
+```{r}
+favstats(~`Distance traveled.m`, `Density`, data = Daneshgar_Mangrove_Data_Cleaned)
+```
+```{r}
+histogram(~Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m` | Daneshgar_Mangrove_Data_Cleaned$Density, xlab = "Distance Traveled (meters)")
+```
+
+```{r}
+favstats(~`Distance traveled.m`, `Tide`, data = Daneshgar_Mangrove_Data_Cleaned)
+histogram(~Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m` | Daneshgar_Mangrove_Data_Cleaned$Tide, xlab = "Distance Traveled (meters)")
+```
+
+## Package: "Moments"
+
+```{r}
+#install.packages("moments")
+library(moments)
+```
+
+## Skewness and Kurtosis for Distance Traveled
+
+```{r}
+kurtosis(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`)
+```
+```{r}
+skewness(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`)
+```
+
+## Boxplots
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m` ~ Daneshgar_Mangrove_Data_Cleaned$Zone, xlab = "Zone", ylab = "Distance Traveled", col = "yellow")
+
+
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m` ~ Daneshgar_Mangrove_Data_Cleaned$Density, col="yellow", xlab = "Density", ylab = "Distance Traveled")
+
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m` ~ Daneshgar_Mangrove_Data_Cleaned$Tide, col="yellow", xlab = "Tide", ylab = "Distance Traveled")
+```
+
+
+# Kruskal Wallis
+
+```{r}
+kruskal.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone)
+
+pairwise.wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone, p.adjust.method = "bonferroni", paired = FALSE)
+```
+
+# Mann-Whitney
+
+```{r}
+Daneshgar_Mangrove_Data_Cleaned$DensityReCode=Daneshgar_Mangrove_Data_Cleaned$`Drop Density`
+Daneshgar_Mangrove_Data_Cleaned$DensityReCode[Daneshgar_Mangrove_Data_Cleaned$`Drop Density`<= 10]=1
+Daneshgar_Mangrove_Data_Cleaned$DensityReCode[Daneshgar_Mangrove_Data_Cleaned$`Drop Density` > 10]=2
+```
+
+Recoded: drop density less than or equal to 10 as a 1 and greater than 1 as 2 
+
+## Density
+```{r}
+wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~ Daneshgar_Mangrove_Data_Cleaned$Density, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
+```
+## Tide
+```{r}
+wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~ Daneshgar_Mangrove_Data_Cleaned$Tide, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
+```
+## Recoded Density (10 instead of 5)
+```{r}
+wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~ Daneshgar_Mangrove_Data_Cleaned$DensityReCode, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
+```
+Ran this again using the new recoded density, with 10 as the threshold instead of 5. Pvalue is lower but still not significant. 
+
+```{r}
+tally(HuntersMangroveData2$Recovered)
+```
+
+# Chi Square
+
+```{r}
+table(HuntersMangroveData2$Density, HuntersMangroveData2$Recovered)
+chisq.test(HuntersMangroveData2$Density, HuntersMangroveData2$Recovered)
+denschi$expected
+```
+```{r}
+table(HuntersMangroveData2$Tide, HuntersMangroveData2$Recovered)
+chisq.test(HuntersMangroveData2$Tide, HuntersMangroveData2$Recovered)
+tidechi$expected
+```
+
+# Regression
+
+```{r}
+scatter.smooth(x=Daneshgar_Mangrove_Data_Cleaned$`Drop Density`, y=Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, main="Distance~Density", xlab = "Drop Density", ylab = "Distance Traveled", pch = 16, col="blue")
+
+smooth.spline(x=Daneshgar_Mangrove_Data_Cleaned$`Drop Density`, y=Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`)
+```
+
+```{r}
+glm1 <- glm(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m` ~ Daneshgar_Mangrove_Data_Cleaned$`Drop Density`, data = Daneshgar_Mangrove_Data_Cleaned)
+summary.out = summary(glm1)
+summary(glm1)
+plot(glm1)
+plot(density(glm1$residuals,bw="SJ"))
+```
+```{r}
+Daneshgar_Mangrove_Data_Cleaned$lndensity=Daneshgar_Mangrove_Data_Cleaned$`Drop Density`
+Daneshgar_Mangrove_Data_Cleaned$lndensity= log(Daneshgar_Mangrove_Data_Cleaned$`Drop Density`)
+
+Daneshgar_Mangrove_Data_Cleaned$lndistancetrav=Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`
+Daneshgar_Mangrove_Data_Cleaned$lndistancetrav= log(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`)
+
+```
+
+```{r}
+scatter.smooth(x=Daneshgar_Mangrove_Data_Cleaned$lndensity, y=Daneshgar_Mangrove_Data_Cleaned$lndistancetrav, main="Distance~Density", xlab = "Drop Density", ylab = " ln Distance Traveled", pch = 16, col="blue")
+```
+
+```{r}
+#install.packages('devtools')
+library(devtools)
+
+#install_github('ddarmon/confcurve')
+
+```
+
+```{r}
+library(confcurve)
+
+```
+
+```{r}
+bcd.out <- bootcurve.lm(`Distance traveled.m`~ `Drop Density`, data = Daneshgar_Mangrove_Data_Cleaned)
+```
+
+```{r}
+plot.confcurve(bcd.out, param = 2)
+plot.confcurve(lm(`Distance traveled.m`~`Drop Density`, data = Daneshgar_Mangrove_Data_Cleaned), param = 2, add=TRUE, col="red")
+```
+```{r}
+confpvalue(bcd.out, theta = 0, param = 2)
+confcurve(bcd.out, 0.95, param = 2)
+```
+
+P-value from bootstrapping
+
+red curve = t distribution
+black curve = bootstrap distribution
+
+## Sign Test
+
+```{r}
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone, mu=0,alternative="two.sided", conf.level = 0.95)
+```
+
+```{r}
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$`DensityCode`, mu=0,alternative="two.sided", conf.level = 0.95)
+```
+```{r}
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Tide, mu=0,alternative="two.sided", conf.level = 0.95)
+```
+
+## KS Test
+
+```{r}
+ks.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone, p.adjust.methods = "bonferroni")
+```
+
+```{r}
+ks.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$DensityCode, p.adjust.methods = "bonferroni")
+```
+```{r}
+Daneshgar_Mangrove_Data_Cleaned$DensityCode=Daneshgar_Mangrove_Data_Cleaned$Density
+Daneshgar_Mangrove_Data_Cleaned$DensityCode[Daneshgar_Mangrove_Data_Cleaned$Density== "L"]=1
+Daneshgar_Mangrove_Data_Cleaned$DensityCode[Daneshgar_Mangrove_Data_Cleaned$Density == "H"]=2
+```
+
+Density: High = 2
+        Low = 2
+        
+## Colored Plot
+
+```{r}
+gf_point(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~Daneshgar_Mangrove_Data_Cleaned$`Drop Density`, data = Daneshgar_Mangrove_Data_Cleaned, col = ~ Zone, main= "Distance~Density", xlab = "Density", ylab = "Distance Traveled")
+```
+
+# Bootstrap with Recovery Density
+
+```{r}
+bcr.out <- bootcurve.lm(`Distance traveled.m`~ `Recovery Density`, data = Daneshgar_Mangrove_Data_Cleaned)
+
+
+```
+
+```{r}
+plot.confcurve(bcr.out, param = 2)
+plot.confcurve(lm(`Distance traveled.m`~`Recovery Density`, data = Daneshgar_Mangrove_Data_Cleaned), param = 2, add=TRUE, col="red")
+```
+```{r}
+confpvalue(bcr.out, theta = 0, param = 2)
+confcurve(bcr.out, 0.95, param = 2)
+```
+
+```{r}
+scatter.smooth(x=Daneshgar_Mangrove_Data_Cleaned$`Recovery Density`, y=Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, main="Distance~Recovery Density", xlab = "Recovery Density", ylab = "Distance Traveled", pch = 16, col="blue")
+```
+
+```{r}
+gf_point(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~Daneshgar_Mangrove_Data_Cleaned$`Recovery Density`, data = Daneshgar_Mangrove_Data_Cleaned, col = ~ Zone, main= "Distance~Density", xlab = "Recovery Density", ylab = "Distance Traveled")
+```
+
