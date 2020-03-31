@@ -1,62 +1,134 @@
 ---
 title: "Mangrove Dispersion"
+authors: Brooke Attardi, Brianna Cirillo, and Sam Cavalli
 output: html_notebook
 ---
-#### Brooke Attardi and Brianna Cirillio
-
-```{r}
 # Installing Packages
-# install.packages("mosaic")
-library(mosaic)
+
+```{r}
+#install.packages("mosaic")
+#library(mosaic)
+
 library(readxl)
-Propagule_Data <- read_excel("/cloud/project/Propagule Data.xlsx", 
+Propagule_Data <- read_excel("Propagule Data.xlsx", 
     sheet = "Sheet1")
-Propagule_Data <- Propagule_Data[-4, ]
+
+Propagule_Data=Propagule_Data[-4,]
 ```
 
-## Descriptive Stats
+# Descriptive Stats
 
-### Drop Density
+## Drop Density
 ```{r}
-favstats(Propagule_Data$DropDensity)
-hist(Propagule_Data$DropDensity, main="Propagule Drop Density", xlab="Drop Density")
+# Descriptives on Drop Density
+fav_stats(Propagule_Data$DropDensity)
+
+# Descriptives of drop density when seperating for high and low density
+densityH <- fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Density == "H"])
+densityL <- fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Density == "L"])
+
+#Plot showing just the spread of the points in drop density
+plot(Propagule_Data$DropDensity, pch=16, col = "Sea Green", main = "Drop Density", xlab= "Drop Density", ylab="Count")
+
+# Plot showing the drop density vs Distance traveled to hekp determine better break for high and low
+plot(Propagule_Data$DropDensity, Propagule_Data$DistanceTraveled.m, pch=16, col = "Dark Olive Green", main = "Drop Density", ylab= "Distance Traveled", xlab="Drop Density")
+
 ```
 
-### Recovery Density
+### Density Cut off
+
 ```{r}
-favstats(Propagule_Data$RecoveryDensity)
-hist(Propagule_Data$RecoveryDensity, main="Propagule Recovery Density", xlab="Recovery Density")
+# Shows the number of high density and the number of low
+tally(Propagule_Data$Density)
+
+# Shows the number of propagules with density <9
+count <- tally(Propagule_Data$DropDensity < 9)
+count
+
+# Creates a new column in the data that allows us to play with the density cut off
+DensityNew <-(Propagule_Data$DropDensity > 12)
+Propagule_Data$DensityNew[Propagule_Data$DropDensity >= 12] ="H"
+Propagule_Data$DensityNew[Propagule_Data$DropDensity <12] ="L"
+
+# Creates a histogram showing the distance traveled with high and low to see how the distributions compare
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$DensityNew, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Density", xlim = c(0,400), breaks=15)
 ```
 
 
-### Distance Traveled
+## Recovery Density
 ```{r}
-fav_stats(Propagule_Data$DistanceTraveled.m)
-hist(Propagule_Data$DistanceTraveled.m, main="Propagule Distance Traveled", xlab="Distance Traveled")
+# Descriptives on Recovery Density
+fav_stats(Propagule_Data$RecoveryDensity)
+
+# Creates a histogram of recovery density
+hist(Propagule_Data$RecoveryDensity, col = "Dark Olive Green", main = "Recovery Density", xlab= "Recovery Density", ylab="Count")
+
+# Creates a plot of recovery density
+plot(Propagule_Data$DistanceTraveled.m, Propagule_Data$RecoveryDensity, pch=16, col = "Dark Olive Green", main = "Recovery Density", xlab= "Density Traveled", ylab="Recovery Density")
 ```
 
-#### Distance Traveled by Zone
+
+## Distance Traveled
 ```{r}
-histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone =="1"], width=300, main="Zone 1", xlab= "Distance Traveled", breaks=15)
-histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone =="2"], width=300, main="Zone 2", xlab= "Distance Traveled", breaks=15)
-histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone =="3"], width=300, main="Zone 3", xlab= "Distance Traveled", breaks=15)
-boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Zone, main="Distance Traveled by Zone", ylab="Distance Traveled", xlab="Zone")
+# Descriptives on Distance Traveled in meters
+distance <- fav_stats(Propagule_Data$DistanceTraveled.m)
+distance
+
+# Histogram of distance traveled
+hist(Propagule_Data$DistanceTraveled.m, col = "Light Green", main = "Distance Traveled", xlab= "Distance Traveled (m)", ylab="Count")
+
+# Scatter plot of distance traveled
+plot(Propagule_Data$DistanceTraveled.m, col = "Light Green", main = "Distance Traveled", ylab= "Distance Traveled (m)", xlab="Count", pch=16)
 ```
 
-#### Distance Traveled by Tide (H/L)
+Looking at the descriptives, the average distance traveled was 181.86 meters, with a standard deviation of 98.08. The high standard deviation 
+
+### Distance Traveled by Zone
 ```{r}
-histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Tide, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Tide", xlim = c(0,400), breaks=15)
-boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Tide, main="Distance Traveled by Tide", ylab="Distance Traveled", xlab="Tide")
+# Descriptive stats on zone broken up by 1, 2, 3
+fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "1"])
+fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "2"])
+fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "3"])
+
+# histogram of zone 1 vs distance traveled
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "1"], width=300, data = Propagule_Data,main= " Distanced Traveled vs Zone 1", xlab= "Distance Traveled", breaks = 15, col= "aquamarine2")
+
+# histogram of zone 2 vs distance traveled
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "2"], width=300, data = Propagule_Data,main= " Distanced Traveled vs Zone 2", xlab= "Distance Traveled", breaks = 15, col= "aquamarine2")
+
+# histogram of zone 3 vs distance traveled
+histogram(~Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone == "3"], width=300, data = Propagule_Data, main= " Distanced Traveled vs Zone 3", xlab= "Distance Traveled", breaks = 15, col= "aquamarine2")
+
+# histogram of zones 1, 2, and 3 vs distance traveled on one axis
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Zone, width=300, data = Propagule_Data, main = "Distance Traveled vs zone", xlab = "Distance Traveled", xlim = c(0,400), breaks=15, col= "aquamarine2")
+
+# box plots for the zones vs distance traveled
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Zone, col = "aquamarine2", main = "Distance Traveled By Zone", xlab = "Zone", ylab = "Distance Traveled")
+```
+
+### Distance Traveled by Tide (H/L)
+```{r}
+# Descriptive stats on tide broken up by high and low
+fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Tide == "H"])
+fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Tide == "L"])
+
+# Side-by-side histogram of the tides high and low vs the distance traveled
+histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Tide, width=300, data = Propagule_Data, main = "Distance Traveled vs Tide", xlab = "Distance Traveled", xlim = c(0,400), breaks=15, col = "cyan3")
+
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Tide, main="Distance Traveled by Tide", ylab="Distance Traveled", xlab="Tide", col= "cyan")
 ```
 
 #### Distance Traveled by Drop Density (H/L)
 ```{r}
 histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$Density, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Drop Density", xlim = c(0,400), breaks=15)
-boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Density, main="Distance Traveled by Drop Density", ylab="Distance Traveled", xlab="Density")
+boxplot(Propagule_Data$DistanceTraveled.m~Propagule_Data$Density, main="Distance Traveled by Drop Density", ylab="Distance Traveled", xlab="Density", col = "cyan")
 ```
 
-## Qualitative Data Descriptives
-### Propagules found in each zone, and each tide
+
+# Qualitative Data Descriptives
+
+## Propagules found in each zone, and each tide
+
 ```{r}
 # This counts all propagules found in each zone 
 tally(Propagule_Data$Zone)
@@ -65,10 +137,50 @@ favstats(~`DistanceTraveled.m`, `Zone`,  data = Propagule_Data)
 tally(Propagule_Data$Tide)
 ```
 
-## Running Tests
-### Kruskal Wallis Test: Zones
+# Running Tests
+
+## Kruskal Wallis Test: Zones
 ```{r}
 # This is a non-parametric ANOVA. We run non-parametrics because the data is not normal. This will compare all data by the median (ex. Median distance travled in Zone 1, compared to Zone 2)
+
+# Wanted more information on the kruskal wallis test in R
+?kruskal.test
+
+# Running the test on distance traveled and how that is affected by zone
 kruskal.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone)
-pairwise.wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone, p.adjust.method = "bonferroni", paired = FALSE)
+
+# Post hoc test(bonferroni) to see where the difference lies in the zones
+pairwise.wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone, p.adjust.method = "bonferroni", conf.int = TRUE, conf.level=0.95, paired = FALSE)
 ```
+
+## Mann Whitney U Test for Density
+
+```{r}
+wilcox.test(Propagule_Data$DistanceTraveled.m~ Propagule_Data$Density, mu = 0, alt = "two.sided", conf.int = TRUE,conf.level=0.95, paired = FALSE )
+```
+
+## Mann Whitney U Test for Tide
+
+```{r}
+wilcox.test(Propagule_Data$DistanceTraveled.m~ Propagule_Data$Tide, mu = 0, alt = "two.sided", conf.int = TRUE,conf.level=0.95, paired = FALSE )
+```
+
+# Package: "Moments"
+
+```{r}
+#install.packages("moments")
+library(moments)
+```
+
+# Skewness and Kurtosis for Distance Traveled
+
+```{r}
+skewness(Propagule_Data$DistanceTraveled.m)
+```
+
+```{r}
+kurtosis(Propagule_Data$DistanceTraveled.m)
+```
+
+
+
