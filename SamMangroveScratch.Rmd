@@ -128,7 +128,7 @@ boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m` ~ Daneshgar_Mangro
 ```{r}
 kruskal.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone)
 
-pairwise.wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone, p.adjust.method = "bonferroni", paired = FALSE)
+pairwise.wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone, p.adjust.method = "bonferroni", paired = FALSE, conf.int=TRUE)
 ```
 
 # Mann-Whitney
@@ -150,6 +150,7 @@ wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~ Daneshgar_Man
 wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~ Daneshgar_Mangrove_Data_Cleaned$Tide, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
 ```
 ## Recoded Density (10 instead of 5)
+
 ```{r}
 wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~ Daneshgar_Mangrove_Data_Cleaned$DensityReCode, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
 ```
@@ -210,7 +211,6 @@ library(devtools)
 
 ```{r}
 library(confcurve)
-
 ```
 
 ```{r}
@@ -234,14 +234,31 @@ black curve = bootstrap distribution
 ## Sign Test
 
 ```{r}
-SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone, mu=0,alternative="two.sided", conf.level = 0.95)
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone ==1], alternative="two.sided", conf.level = 0.95)
+```
+```{r}
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone ==2], alternative="two.sided", conf.level = 0.95)
+```
+```{r}
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone ==3], alternative="two.sided", conf.level = 0.95)
+```
+
+
+
+
+```{r}
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[ Daneshgar_Mangrove_Data_Cleaned$`Density`== "H"],alternative="two.sided", conf.level = 0.95)
+```
+```{r}
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[ Daneshgar_Mangrove_Data_Cleaned$`Density`== "L"],alternative="two.sided", conf.level = 0.95)
 ```
 
 ```{r}
-SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$`DensityCode`, mu=0,alternative="two.sided", conf.level = 0.95)
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[ Daneshgar_Mangrove_Data_Cleaned$`Tide`== "L"],alternative="two.sided", conf.level = 0.95)
 ```
+
 ```{r}
-SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Tide, mu=0,alternative="two.sided", conf.level = 0.95)
+SignTest(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[ Daneshgar_Mangrove_Data_Cleaned$`Tide`== "H"],alternative="two.sided", conf.level = 0.95)
 ```
 
 ## KS Test
@@ -291,5 +308,28 @@ scatter.smooth(x=Daneshgar_Mangrove_Data_Cleaned$`Recovery Density`, y=Daneshgar
 
 ```{r}
 gf_point(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~Daneshgar_Mangrove_Data_Cleaned$`Recovery Density`, data = Daneshgar_Mangrove_Data_Cleaned, col = ~ Zone, main= "Distance~Density", xlab = "Recovery Density", ylab = "Distance Traveled")
+```
+
+# Zone 1 Descriptives 
+
+## High vs low density
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"] ~ Daneshgar_Mangrove_Data_Cleaned$Density[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+
+## High vs low tide 
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"] ~ Daneshgar_Mangrove_Data_Cleaned$Tide[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+
+## High density and low tide 
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1" & Daneshgar_Mangrove_Data_Cleaned$Density=="H" & Daneshgar_Mangrove_Data_Cleaned$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+```{r}
+favstats((Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1" & Daneshgar_Mangrove_Data_Cleaned$Density=="H" & Daneshgar_Mangrove_Data_Cleaned$Tide=="L"]))
 ```
 
