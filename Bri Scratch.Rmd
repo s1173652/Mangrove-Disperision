@@ -155,4 +155,86 @@ wilcox.test(Propagule_Data$DistanceTraveled.m~ Propagule_Data$Density, mu = 0, a
 ```{r}
 wilcox.test(Propagule_Data$DistanceTraveled.m~ Propagule_Data$Tide, mu = 0, alt = "two.sided", conf.int = TRUE,conf.level=0.95, paired = FALSE )
 ```
+# Uploading Reworked Data
+
+```{r}
+library(readxl)
+ReorgPropagule_Data <- read_excel("Propagule Data.xlsx", 
+    sheet = "ReworkedData")
+
+```
+
+# Zone 1
+
+## High Tide High Density
+
+```{r}
+boxplot(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "1" & ReorgPropagule_Data$Density=="H" & ReorgPropagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "lavender")
+
+favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "1" & ReorgPropagule_Data$Density=="H" & ReorgPropagule_Data$Tide=="H"])
+```
+
+## Low Density Low Tide
+
+```{r}
+boxplot(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "1" & ReorgPropagule_Data$Density=="L" & ReorgPropagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "plum4")
+
+favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "1" & ReorgPropagule_Data$Density=="L" & ReorgPropagule_Data$Tide=="L"])
+```
+
+## High Density Low Tide
+
+```{r}
+boxplot(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "1" & ReorgPropagule_Data$Density=="H" & ReorgPropagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "darkorchid1")
+
+favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "1" & ReorgPropagule_Data$Density=="H" & ReorgPropagule_Data$Tide=="L"])
+```
+
+## Low Density High Tide
+
+```{r}
+boxplot(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "1" & ReorgPropagule_Data$Density=="L" & ReorgPropagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "plum")
+
+favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "1" & ReorgPropagule_Data$Density=="L" & ReorgPropagule_Data$Tide=="H"])
+```
+
+# Zone 2
+
+## High Tide High Density
+
+```{r}
+boxplot(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2" & ReorgPropagule_Data$Density=="H" & ReorgPropagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "pink")
+
+favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2" & ReorgPropagule_Data$Density=="H" & ReorgPropagule_Data$Tide=="H"])
+```
+
+## Low Density Low Tide
+
+```{r}
+boxplot(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2" & ReorgPropagule_Data$Density=="L" & ReorgPropagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "pink1")
+
+favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2" & ReorgPropagule_Data$Density=="L" & ReorgPropagule_Data$Tide=="L"])
+```
+
+## High Density Low Tide
+
+```{r}
+boxplot(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2" & ReorgPropagule_Data$Density=="H" & ReorgPropagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "thistle1")
+
+favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2" & ReorgPropagule_Data$Density=="H" & ReorgPropagule_Data$Tide=="L"])
+```
+
+## Low Density High Tide
+
+```{r}
+boxplot(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2" & ReorgPropagule_Data$Density=="L" & ReorgPropagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "thistle2")
+
+favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2" & ReorgPropagule_Data$Density=="L" & ReorgPropagule_Data$Tide=="H"])
+```
+
+
+
+
+
+
 
