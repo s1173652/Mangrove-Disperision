@@ -287,4 +287,20 @@ plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Dat
 boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "green")
 ```
 
+```{r}
+#install.packages("devtools")
+library(devtools)
+#install_github("ddarmon/confcurve")
+library(confcurve)
+```
+```{r}
+Propagule_Data$DistanceTraveled.m
+Propagule_Data$Zone <- as.factor(Propagule_Data$Zone)
+Propagule_Data$Zone
+```
+
+
+```{r}
+OneWayZone <- confcurve.oneway(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone,20000,0.95)
+```
 
