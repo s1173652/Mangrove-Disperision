@@ -27,7 +27,7 @@ fav_stats(Propagule_Data$DropDensity)
 densityH <- fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Density == "H"])
 densityL <- fav_stats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Density == "L"])
 
-#Plot showing just the spread of the points in drop density
+# Plot showing just the spread of the points in drop density
 plot(Propagule_Data$DropDensity, pch=16, col = "Sea Green", main = "Drop Density", xlab= "Drop Density", ylab="Count")
 
 # Plot showing the drop density vs Distance traveled to hekp determine better break for high and low
@@ -41,7 +41,7 @@ plot(Propagule_Data$DropDensity, Propagule_Data$DistanceTraveled.m, pch=16, col 
 # Shows the number of high density and the number of low
 tally(Propagule_Data$Density)
 
-# Shows the number of propagules with density <9
+# Shows the number of propagules with density < 9
 count <- tally(Propagule_Data$DropDensity < 9)
 count
 
@@ -148,8 +148,24 @@ tally(Propagule_Data$Tide)
 
 # Running the test on distance traveled and how that is affected by zone
 kruskal.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone)
+<<<<<<< HEAD
+pairwise.wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone, p.adjust.method = "bonferroni", paired = FALSE)
+```
+
+### Mann-Whitney U Test: Tide and Drop Density
+
+#### Density
+```{r}
+# This is a non-parametric T-test, because there are only two levels. This will compare the data by the median (ex. H/L drop density vs H/L tide)
+wilcox.test(Propagule_Data$DistanceTraveled.m~ Propagule_Data$Density, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
+```
+#### Tide
+```{r}
+wilcox.test(Propagule_Data$DistanceTraveled.m~ Propagule_Data$Tide, mu = 0, alt = "two.sided", conf.int = T,conf.level=0.95, paired = FALSE )
+```
 
 # Post hoc test(bonferroni) to see where the difference lies in the zones
+```{r}
 pairwise.wilcox.test(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone, p.adjust.method = "bonferroni", conf.int = TRUE, conf.level=0.95, paired = FALSE)
 ```
 
@@ -181,6 +197,129 @@ skewness(Propagule_Data$DistanceTraveled.m)
 ```{r}
 kurtosis(Propagule_Data$DistanceTraveled.m)
 ```
+
+# Nested
+
+## Zone 1
+### High Density: High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "lavender", main = "Zone 1 High Density High Tide")
+```
+
+### High Density: Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "plum4", main = "Zone 1 High Density Low Tide")
+```
+
+### Low Density: High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "darkorchid1", main = "Zone 1 Low Density High Tide")
+```
+
+### Low Density: Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "plum", main = "Zone 1 Low Density Low Tide")
+```
+
+## Zone 2
+### High Density: High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "pink", main = "Zone 2 High Density High Tide")
+```
+
+### High Density: Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col = "pink1", main = "Zone 2 High Density Low Tide")
+```
+
+### Low Density: High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "thistle1", main = "Zone 2 Low Density High Tide")
+```
+
+### Low Density: Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col = "thistle2", main = "Zone 2 Low Density Low Tide")
+```
+
+## Zone 3
+### High Density: High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col = "deepskyblue1", main = "Zone 3 High Density High Tide")
+```
+
+### High Density: Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "deepskyblue3", main = "Zone 3 High Density Low Tide")
+```
+
+### Low Density: High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col = "deepskyblue4", main = "Zone 3 Low Density High Tide")
+```
+
+### Low Density: Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "dodgerblue2", main = "Zone 3 Low Density Low Tide")
+```
+# Install Bootstrapping Package
+
+```{r}
+# install.packages("devtools")
+library(devtools)
+# install_github("ddarmon/confcurve")
+library(confcurve)
+```
+```{r}
+Propagule_Data$DistanceTraveled.m
+Propagule_Data$Zone <- as.factor(Propagule_Data$Zone)
+Propagule_Data$Zone
+
+Propagule_Data$Density
+```
+
+## Bootstrapping For Zone
+
+```{r}
+OneWayZone <- confcurve.oneway(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone,20000,0.95)
+```
+## Bootstrapping For Tide
+
+```{r}
+OneWayZone <- confcurve.oneway(Propagule_Data$DistanceTraveled.m, Propagule_Data$Tide,20000,0.95)
+```
+## Bootstrapping For Density
+
+```{r}
+OneWayZone <- confcurve.oneway(Propagule_Data$DistanceTraveled.m, Propagule_Data$Density,20000,0.95)
+```
+
+
+
 
 
 
