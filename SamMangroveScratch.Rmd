@@ -157,6 +157,8 @@ wilcox.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~ Daneshgar_Man
 Ran this again using the new recoded density, with 10 as the threshold instead of 5. Pvalue is lower but still not significant. 
 
 ```{r}
+library(readxl)
+HuntersMangroveData2 <- read_excel("HuntersMangroveData2.xlsx")
 tally(HuntersMangroveData2$Recovered)
 ```
 
@@ -165,12 +167,12 @@ tally(HuntersMangroveData2$Recovered)
 ```{r}
 table(HuntersMangroveData2$Density, HuntersMangroveData2$Recovered)
 chisq.test(HuntersMangroveData2$Density, HuntersMangroveData2$Recovered)
-denschi$expected
+
 ```
 ```{r}
 table(HuntersMangroveData2$Tide, HuntersMangroveData2$Recovered)
 chisq.test(HuntersMangroveData2$Tide, HuntersMangroveData2$Recovered)
-tidechi$expected
+
 ```
 
 # Regression
@@ -268,7 +270,7 @@ ks.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrov
 ```
 
 ```{r}
-ks.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$DensityCode, p.adjust.methods = "bonferroni")
+#ks.test(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$DensityCode, p.adjust.methods = "bonferroni")
 ```
 ```{r}
 Daneshgar_Mangrove_Data_Cleaned$DensityCode=Daneshgar_Mangrove_Data_Cleaned$Density
@@ -318,7 +320,11 @@ gf_point(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`~Daneshgar_Mangrov
 boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"] ~ Daneshgar_Mangrove_Data_Cleaned$Density[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
 ```
 
-## High vs low tide 
+```{r}
+#favstats(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"] ~ Daneshgar_Mangrove_Data_Cleaned$Density[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"])
+```
+
+## High and low tide 
 
 ```{r}
 boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"] ~ Daneshgar_Mangrove_Data_Cleaned$Tide[Daneshgar_Mangrove_Data_Cleaned$Zone== "1"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
@@ -331,5 +337,104 @@ boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove
 ```
 ```{r}
 favstats((Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1" & Daneshgar_Mangrove_Data_Cleaned$Density=="H" & Daneshgar_Mangrove_Data_Cleaned$Tide=="L"]))
+```
+
+## Low density and high tide 
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1" & Daneshgar_Mangrove_Data_Cleaned$Density=="L" & Daneshgar_Mangrove_Data_Cleaned$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+
+```{r}
+favstats(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "1" & Daneshgar_Mangrove_Data_Cleaned$Density=="L" & Daneshgar_Mangrove_Data_Cleaned$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+# Zone 2 Descriptives
+
+## High vs low density
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "2"] ~ Daneshgar_Mangrove_Data_Cleaned$Density[Daneshgar_Mangrove_Data_Cleaned$Zone== "2"], xlab = "Zone 2", ylab = "Distance Traveled", col = "yellow")
+```
+
+## High vs low tide 
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "2"] ~ Daneshgar_Mangrove_Data_Cleaned$Tide[Daneshgar_Mangrove_Data_Cleaned$Zone== "2"], xlab = "Zone 2", ylab = "Distance Traveled", col = "yellow")
+```
+## High density and low tide 
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "2" & Daneshgar_Mangrove_Data_Cleaned$Density=="H" & Daneshgar_Mangrove_Data_Cleaned$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col = "yellow")
+```
+
+```{r}
+favstats((Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "2" & Daneshgar_Mangrove_Data_Cleaned$Density=="H" & Daneshgar_Mangrove_Data_Cleaned$Tide=="L"]))
+```
+
+## Low density and high tide
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "2" & Daneshgar_Mangrove_Data_Cleaned$Density=="L" & Daneshgar_Mangrove_Data_Cleaned$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "yellow")
+```
+
+```{r}
+favstats(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "2" & Daneshgar_Mangrove_Data_Cleaned$Density=="L" & Daneshgar_Mangrove_Data_Cleaned$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "yellow")
+```
+
+# Zone 3
+
+## High vs low density
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "3"] ~ Daneshgar_Mangrove_Data_Cleaned$Density[Daneshgar_Mangrove_Data_Cleaned$Zone== "3"], xlab = "Zone 3", ylab = "Distance Traveled", col = "yellow")
+```
+## High vs low tide 
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "3"] ~ Daneshgar_Mangrove_Data_Cleaned$Tide[Daneshgar_Mangrove_Data_Cleaned$Zone== "3"], xlab = "Zone 3", ylab = "Distance Traveled", col = "yellow")
+```
+
+## High density and low tide 
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "3" & Daneshgar_Mangrove_Data_Cleaned$Density=="H" & Daneshgar_Mangrove_Data_Cleaned$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "yellow")
+```
+
+```{r}
+favstats((Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "3" & Daneshgar_Mangrove_Data_Cleaned$Density=="H" & Daneshgar_Mangrove_Data_Cleaned$Tide=="L"]))
+```
+## Low density and high tide
+
+```{r}
+boxplot(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "3" & Daneshgar_Mangrove_Data_Cleaned$Density=="L" & Daneshgar_Mangrove_Data_Cleaned$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col = "yellow")
+```
+```{r}
+favstats(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`[Daneshgar_Mangrove_Data_Cleaned$Zone== "3" & Daneshgar_Mangrove_Data_Cleaned$Density=="L" & Daneshgar_Mangrove_Data_Cleaned$Tide=="H"], xlab= "Zone 3", ylab = "Distance Traveled", col = "yellow")
+```
+
+```{r}
+#install.packages("devtools")
+#install.packages("cli")
+#library(cli)
+
+library(devtools)
+
+
+
+#install_github("ddarmon/confcurve")
+library(confcurve)
+
+
+
+```
+
+```{r}
+Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`
+Daneshgar_Mangrove_Data_Cleaned$Zone <- as.factor(Daneshgar_Mangrove_Data_Cleaned$Zone)
+Daneshgar_Mangrove_Data_Cleaned$Zone
+```
+
+```{r}
+oneway.zone <- confcurve.oneway(Daneshgar_Mangrove_Data_Cleaned$`Distance traveled.m`, Daneshgar_Mangrove_Data_Cleaned$Zone, 2000, 0.95)
 ```
 
