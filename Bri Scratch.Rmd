@@ -74,7 +74,7 @@ Propagule_Data$DensityNew[Propagule_Data$DropDensity <12] ="L"
 # Creates a histogram showing the distance traveled with high and low to see how the distributions compare
 histogram(~Propagule_Data$DistanceTraveled.m | Propagule_Data$DensityNew, width=300, data = Propagule_Data, xlab= "Distance Traveled vs Density", xlim = c(0,400), breaks=15)
 ```
-
+The two histograms are not normal. The Distance Traveled vs. High Density one is skewed to the right while the Distance Traveled vs. Low Density seems to be almost bimodal. 
 
 ### Recovery Density
 ```{r}
@@ -88,6 +88,7 @@ hist(Propagule_Data$RecoveryDensity, col = "Dark Olive Green", main = "Recovery 
 plot(Propagule_Data$DistanceTraveled.m, Propagule_Data$RecoveryDensity, pch=16, col = "Dark Olive Green", main = "Recovery Density", xlab= "Density Traveled", ylab="Recovery Density")
 ```
 
+There is no pattern showing in the plot.
 
 ### Tide
 ```{r}
@@ -233,8 +234,52 @@ favstats(ReorgPropagule_Data$`DistanceTraveled.m`[ReorgPropagule_Data$Zone== "2"
 ```
 
 
+# Reorganzing Data Zone and Tide
 
+## Zone 1 High Tide
 
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="H"])
 
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "dodgerblue2", main = "Zone 1 High Tide")
+```
 
+## Zone 1 Low Tide
 
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "dodgerblue1", main = "Zone 1 Low Tide")
+```
+
+## Zone 2 High Tide
+
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="H"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "green", main = "Zone 2 High Tide")
+```
+
+## Zone 2 Low Tide
+
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col = "green2", main = "Zone 2 Low Tide")
+```
+
+## Zone 3 High Tide
+
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="H"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col = "yellow", main = "Zone 3 High Tide")
+```
+
+## Zone 2 Low Tide
+
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="L"])
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "yellow2", main = "Zone 3 Low Tide")
+```
