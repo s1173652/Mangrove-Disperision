@@ -204,106 +204,128 @@ kurtosis(Propagule_Data$DistanceTraveled.m)
 ### High Density: High Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "lavender", main = "Zone 1 High Density High Tide")
 ```
 
 ### High Density: Low Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "plum4", main = "Zone 1 High Density Low Tide")
 ```
 
 ### Low Density: High Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "darkorchid1", main = "Zone 1 Low Density High Tide")
 ```
 
 ### Low Density: Low Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "plum", main = "Zone 1 Low Density Low Tide")
 ```
 
 ## Zone 2
 ### High Density: High Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "blue")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "pink", main = "Zone 2 High Density High Tide")
 ```
 
 ### High Density: Low Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col = "blue")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col = "pink1", main = "Zone 2 High Density Low Tide")
 ```
 
 ### Low Density: High Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "blue")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 2", ylab = "Distance Traveled", col = "thistle1", main = "Zone 2 Low Density High Tide")
 ```
 
 ### Low Density: Low Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col = "blue")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 2", ylab = "Distance Traveled", col = "thistle2", main = "Zone 2 Low Density Low Tide")
 ```
 
 ## Zone 3
 ### High Density: High Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col = "green")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col = "deepskyblue1", main = "Zone 3 High Density High Tide")
 ```
 
 ### High Density: Low Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "green")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="H" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "deepskyblue3", main = "Zone 3 High Density Low Tide")
 ```
 
 ### Low Density: High Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col = "green")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="H"], xlab = "Zone 3", ylab = "Distance Traveled", col = "deepskyblue4", main = "Zone 3 Low Density High Tide")
 ```
 
 ### Low Density: Low Tide
 ```{r}
 favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"])
-plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col="blue")
-boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "green")
+
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "dodgerblue2", main = "Zone 3 Low Density Low Tide")
 ```
+# Install Bootstrapping Package
 
 ```{r}
-#install.packages("devtools")
+# install.packages("devtools")
 library(devtools)
-#install_github("ddarmon/confcurve")
+# install_github("ddarmon/confcurve")
 library(confcurve)
 ```
 ```{r}
 Propagule_Data$DistanceTraveled.m
 Propagule_Data$Zone <- as.factor(Propagule_Data$Zone)
 Propagule_Data$Zone
+
+Propagule_Data$Density
 ```
 
+## Bootstrapping For Zone
 
 ```{r}
 OneWayZone <- confcurve.oneway(Propagule_Data$DistanceTraveled.m, Propagule_Data$Zone,20000,0.95)
 ```
+<<<<<<< HEAD
 # Nested (6 Treatments)
+=======
+## Bootstrapping For Tide
+
+```{r}
+OneWayZone <- confcurve.oneway(Propagule_Data$DistanceTraveled.m, Propagule_Data$Tide,20000,0.95)
+```
+## Bootstrapping For Density
+
+```{r}
+OneWayZone <- confcurve.oneway(Propagule_Data$DistanceTraveled.m, Propagule_Data$Density,20000,0.95)
+```
+
+
+
+
+
+>>>>>>> c920dd2cebb48042d037af4a6a830f89a87c8268
 
 ## Zone 1
 ### High Tide
