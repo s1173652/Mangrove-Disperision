@@ -182,3 +182,46 @@ favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule
 plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col="blue")
 boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Density=="L" & Propagule_Data$Tide=="L"], xlab = "Zone 3", ylab = "Distance Traveled", col = "green")
 ```
+# Nested (6 Treatments)
+
+## Zone 1
+### High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="H"])
+plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+### Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="L"])
+plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "1" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+
+## Zone 2
+### High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="H"])
+plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+### Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="L"])
+plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "2" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+## Zone 3
+### High Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="H"])
+plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="H"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+### Low Tide
+```{r}
+favstats(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="L"])
+plot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col="blue")
+boxplot(Propagule_Data$DistanceTraveled.m[Propagule_Data$Zone== "3" & Propagule_Data$Tide=="L"], xlab = "Zone 1", ylab = "Distance Traveled", col = "yellow")
+```
+
